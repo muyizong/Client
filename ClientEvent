@@ -1,0 +1,20 @@
+public class ClientEvent {
+	
+	private Client client;
+	public String type;
+	public String userName;
+	public String chatroom;
+	public ClientEvent(Client client) {
+		this.client = client;
+	}
+	
+	public String getName() {
+		return client.name;
+	}
+	
+	public String getIp() {
+		return client.ip;
+	}
+	
+	public long time;
+}
