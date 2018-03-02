@@ -1,0 +1,35 @@
+import java.util.ArrayList;
+
+public class ClientQueue {
+	//所有客戶端集合
+	private ArrayList clients = new ArrayList();
+	//所有事件訂閱者
+	private ArrayList listeners = new ArrayList();
+	
+	//訂閱客戶端集合變動事件
+	public void addClientListener(ClientListener listener) {
+		listeners.add(listener);
+	}
+	
+	//加入客戶端
+	public void add(Client client) {
+		clients.add(client); //加入集合
+		ClientEvent event = new ClientEvent(client);
+		for(int i = 0; i < listeners.size(); i++) {
+			ClientListener listener = (ClientListener) listeners.get(i);
+			listener.clientAdded(event);
+			listener.clientAdded(event);
+		}		
+	}
+	
+	//移除客戶端
+	public void remove(Client client) {
+		clients.remove(client); //移除集合
+		ClientEvent event = new ClientEvent(client);
+		event.time = 0001;
+		for(int i = 0; i < listeners.size(); i++) {
+			ClientListener listener = (ClientListener) listeners.get(i);
+			listener.clientRemoved(event);
+		}
+	}
+}
